@@ -6,10 +6,18 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity(name = "te_persona")
 public class Persona {
 	
 	@Id
@@ -34,6 +42,7 @@ public class Persona {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdOn;
 
 }
