@@ -13,7 +13,7 @@ public interface ItemService {
 	
 	Item update(Long id, Item item);
 	
-	List<Item> getAll();
+	List<Item> getAll();	
 	
 	Optional<Item> findById(Long id);
 	

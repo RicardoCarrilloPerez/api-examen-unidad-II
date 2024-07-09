@@ -3,10 +3,13 @@ package com.example.demo.persistence.entities;
 import java.util.Date;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -21,7 +24,8 @@ import lombok.NoArgsConstructor;
 public class Persona {
 	
 	@Id
-	@Column
+	@Column(nullable = false)
+	@GeneratedValue(generator = "UUID")
 	private UUID id;
 	
 	@Column(length = 50, nullable = false)
@@ -37,12 +41,17 @@ public class Persona {
 	private String email;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	@Temporal(TemporalType.DATE)
-	private Date   birthdate;
+	@Column(name = "birthdate", nullable = false, columnDefinition = "DATE")
+	private Date birthdate;
+
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	@Column(nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
+	
+	@CreationTimestamp
 	private Date createdOn;
+	
+	
+	
 
 }

@@ -17,10 +17,20 @@ public class PersonaServiceImplementation implements PersonaService {
 	@Autowired
 	private PersonaRepository personaRepository;
 	
-	@Override
-	public Persona save(Persona persona) {
-		return this.personaRepository.save(persona);
-	}
+	 @Override
+	    public Persona save(Persona persona) {
+	       
+		 if (persona.getEmail() == null) {
+	            throw new IllegalArgumentException("El campo 'email' no puede ser null");
+	        }
+		 
+	        if (persona.getId() == null) {
+	            persona.setId(UUID.randomUUID()); 
+	        }
+	        
+	        
+	        return personaRepository.save(persona);
+	    }
 
 	@Override
 	public Persona update(UUID id, Persona persona) {
